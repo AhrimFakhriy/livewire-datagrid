@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Database\Factories;
+namespace AhrimFakhriy\LivewireDatagrid\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

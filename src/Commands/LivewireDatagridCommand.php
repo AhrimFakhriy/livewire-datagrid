@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace AhrimFakhriy\LivewireDatagrid\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LivewireDatagridCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'livewire-datagrid';
 
     public $description = 'My command';
 
