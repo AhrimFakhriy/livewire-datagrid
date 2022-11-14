@@ -1,6 +1,6 @@
 <?php
 
-namespace AhrimFakhriy\LivewireDatagrid\Traits;
+namespace AhrimFakhriy\LivewireDatagrid\Concerns;
 
 trait WithFilters
 {
@@ -24,8 +24,13 @@ trait WithFilters
         $this->resetPage($this->pageName);
     }
 
-    public function resetFilters()
+    public function resetFilters(): void
     {
         $this->reset('filters');
+    }
+
+    public function resetSearch(): void
+    {
+        $this->filters['search'] = null;
     }
 }

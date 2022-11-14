@@ -8,18 +8,27 @@ use AhrimFakhriy\LivewireDatagrid\Commands\LivewireDatagridCommand;
 
 class LivewireDatagridServiceProvider extends PackageServiceProvider
 {
+
+    private string $packageName = 'livewire-datagrid';
+
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
-            ->name('livewire-datagrid')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_livewire-datagrid_table')
-            ->hasCommand(LivewireDatagridCommand::class);
+            ->name($this->packageName)
+            ->hasConfigFile();
+            // ->hasMigration('create_livewire-datagrid_table')
+            // ->hasCommand(LivewireDatagridCommand::class);
+
+        $this->publishViews();
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', $this->packageName);
+    }
+
+    private function publishViews(): void
+    {
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', $this->packageName);
+
+        $this->publishes([
+            __DIR__ . '/../../resources/views' => resource_path('views/vendor/' . $this->packageName),
+        ], $this->packageName . '-views');
     }
 }

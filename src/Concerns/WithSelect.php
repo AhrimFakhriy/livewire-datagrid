@@ -1,6 +1,6 @@
 <?php
 
-namespace AhrimFakhriy\LivewireDatagrid\Traits;
+namespace AhrimFakhriy\LivewireDatagrid\Concerns;
 
 trait WithSelect
 {
@@ -40,5 +40,14 @@ trait WithSelect
     public function resetSelected(): void
     {
         $this->selected = [];
+    }
+
+    public function renderWithSelectData(): array
+    {
+        return [
+            'pageIsSelected'    => $this->pageIsSelected(),
+            'selected'          => $this->selected,
+            'withSelect'        => true,
+        ];
     }
 }

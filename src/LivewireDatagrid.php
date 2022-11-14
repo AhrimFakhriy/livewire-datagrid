@@ -2,16 +2,16 @@
 
 namespace AhrimFakhriy\LivewireDatagrid;
 
-use AhrimFakhriy\LivewireDatagrid\Traits\WithFilters;
-use AhrimFakhriy\LivewireDatagrid\Traits\WithSelect;
-use AhrimFakhriy\LivewireDatagrid\Traits\WithSorting;
+use AhrimFakhriy\LivewireDatagrid\Concerns\WithFilters;
+use AhrimFakhriy\LivewireDatagrid\Concerns\WithSorting;
+use AhrimFakhriy\LivewireDatagrid\Concerns\WithSelect;
+use Livewire\{Component, WithPagination};
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Livewire\{Component, WithPagination};
 
 abstract class LivewireDatagrid extends Component
 {
-    use WithPagination, WithSorting, WithFilters, WithSelect;
+    use WithPagination, WithSorting, WithFilters;
 
     public string $rowIdentifier = 'id';
     public string $pageName = 'page';
@@ -40,6 +40,11 @@ abstract class LivewireDatagrid extends Component
         return $this->rows();
     }
 
+    public function getColumnsProperty(): array
+    {
+        return $this->columns();
+    }
+
     public function getRowIdentifiersProperty(): Collection
     {
         return $this->rows
@@ -47,17 +52,26 @@ abstract class LivewireDatagrid extends Component
             ->map(fn ($id) => (string) $id);
     }
 
-    public function getColumnsProperty(): array
+    public function addButton(): Button|View|string|null
     {
-        return $this->columns();
+        return null;
     }
 
-    public abstract function view(): View;
-    public abstract function addButton(): View|array|string;
+    public function view(): View {
+        return view('livewire.data-table');
+    }
 
     final public function render(): View
     {
-        return $this->view();
-    }
+        $withSelect = in_array(WithSelect::class, class_uses_recursive($this))
+            ? $this->renderWithSelectData()
+            : [];
 
+        return $this->view()->with([
+            'addButton' => $this->addButton(),
+            'columns' => $this->columns(),
+            'rows' => $this->rows,
+            ...$withSelect,
+        ]);
+    }
 }

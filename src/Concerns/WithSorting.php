@@ -1,6 +1,6 @@
 <?php
 
-namespace AhrimFakhriy\LivewireDatagrid\Traits;
+namespace AhrimFakhriy\LivewireDatagrid\Concerns;
 
 use Illuminate\Contracts\Database\Query\Builder;
 
