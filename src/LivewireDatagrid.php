@@ -5,6 +5,8 @@ namespace AhrimFakhriy\LivewireDatagrid;
 use AhrimFakhriy\LivewireDatagrid\Concerns\WithFilters;
 use AhrimFakhriy\LivewireDatagrid\Concerns\WithSorting;
 use AhrimFakhriy\LivewireDatagrid\Concerns\WithSelect;
+use Illuminate\Contracts\Database\Query\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Livewire\{Component, WithPagination};
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
@@ -58,7 +60,7 @@ abstract class LivewireDatagrid extends Component
     }
 
     public function view(): View {
-        return view('livewire.data-table');
+        return view('livewire-datagrid::data-table');
     }
 
     final public function render(): View

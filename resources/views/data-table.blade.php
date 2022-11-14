@@ -10,6 +10,9 @@
             {{-- <x-data-table.search-input /> --}}
             {{-- RightToolbarView --}}
             {{-- AddButton --}}
+            @isset($addButton)
+                {!! is_string($addButton) ? $addButton : $addButton->render() !!}
+            @endisset
         </div>
     </div>
 
@@ -17,23 +20,22 @@
         <div class="overflow-x-auto">
             <table class="table-auto w-full border-collapse">
                 <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-b border-slate-200">
-                    <x-table.row>
+                    <x-livewire-datagrid::table.row>
                         {{-- WithSelect --}}
                         {{-- RowIndex --}}
                         @foreach ($columns as $field => $column)
                             {{-- Sortable --}}
-                            <x-table.heading :class="$column['class'] ?? ''">
+                            <x-livewire-datagrid::table.heading :class="$column['class'] ?? ''">
                                 {{ $column['label'] ?? $column }}
-                            </x-table.heading>
-                            @endisset
+                            </x-livewire-datagrid::table.heading>
                         @endforeach
                         {{-- Action --}}
-                    </x-table.row>
+                    </x-livewire-datagrid::table.row>
                 </thead>
 
                 <tbody class="text-sm divide-y divide-slate-200">
                     @forelse ($rows as $row)
-                        <x-table.row wire:loading.class.delay="opacity-50" wire:key="data-table-row-{{ $row->{$rowIdentifier} }}">
+                        <x-livewire-datagrid::table.row wire:loading.class.delay="opacity-50" wire:key="data-table-row-{{ $row->{$rowIdentifier} }}">
                             {{-- @isset($withSelect)
                                 <x-table.cell>
                                     <x-input.checkbox wire:model="selected" :value="$row->{$rowIdentifier}" wire:loading.attr="disabled" />
@@ -45,7 +47,7 @@
                                 </x-table.cell>
                             @endif --}}
                             @foreach ($columns as $field => $column)
-                                <x-table.cell :class="$column['data-class'] ?? ''">
+                                <x-livewire-datagrid::table.cell class="px-4 py-2 {{ $column['data-class'] ?? '' }}">
                                     <span>{!!
                                         array_key_exists('formatted_data', $column) && is_callable($column['formatted_data'])
                                             ? $column['formatted_data']($row)
@@ -55,19 +57,19 @@
                                                     ? Arr::get($row, $column['data'])
                                                     : $column['data']($row)))
                                     !!}</span>
-                                </x-table.cell>
+                                </x-livewire-datagrid::table.cell>
                             @endforeach
                             {{-- @isset($actionsView)
                                 <x-table.cell>
                                     @include($actionsView, ['row' => $row])
                                 </x-table.cell>
                             @endisset --}}
-                        </x-table.row>
+                        </x-livewire-datagrid::table.row>
                     @empty
-                        <x-table.row>
-                            <x-table.cell colspan="100">
+                        <x-livewire-datagrid::table.row>
+                            <x-livewire-datagrid::table.cell colspan="100">
                                 <div class="py-2 text-center"><span class="text-slate-500">{{ trans("livewire-datagrid::datatable.labels.no_data") }}</span></div>
-                            </x-table.cell>
+                            </x-livewire-datagrid::table.cell>
                         </x-table.row>
                     @endforelse
                 </tbody>

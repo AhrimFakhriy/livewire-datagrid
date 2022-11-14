@@ -15,12 +15,13 @@ class LivewireDatagridServiceProvider extends PackageServiceProvider
     {
         $package
             ->name($this->packageName)
-            ->hasConfigFile();
+            ->hasConfigFile()
+            ->hasViews();
             // ->hasMigration('create_livewire-datagrid_table')
             // ->hasCommand(LivewireDatagridCommand::class);
 
         $this->publishViews();
-        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', $this->packageName);
+        // $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', $this->packageName);
     }
 
     private function publishViews(): void
