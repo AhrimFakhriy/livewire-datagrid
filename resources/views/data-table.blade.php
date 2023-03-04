@@ -47,7 +47,7 @@
                                 </x-table.cell>
                             @endif --}}
                             @foreach ($columns as $field => $column)
-                                <x-livewire-datagrid::table.cell class="px-4 py-2 {{ $column['data-class'] ?? '' }}">
+                                <x-livewire-datagrid::table.cell class="px-4 py-3 {{ $column['data-class'] ?? '' }}">
                                     <span>{!!
                                         array_key_exists('formatted_data', $column) && is_callable($column['formatted_data'])
                                             ? $column['formatted_data']($row)
