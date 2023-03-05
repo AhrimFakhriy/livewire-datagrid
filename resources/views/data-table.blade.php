@@ -17,7 +17,7 @@
     </div>
 
     <div class="bg-white rounded border border-slate-200"> <!-- shadow-lg goes here if exists !-->
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto overflow-y-visible">
             <table class="table-auto w-full border-collapse">
                 <thead class="text-xs font-semibold uppercase text-slate-500 bg-slate-50 border-b border-slate-200">
                     <x-livewire-datagrid::table.row>
