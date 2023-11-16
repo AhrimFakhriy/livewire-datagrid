@@ -59,6 +59,11 @@ abstract class LivewireDatagrid extends Component
         return null;
     }
 
+    public function footer(): View|string|null
+    {
+        return null;
+    }
+
     public function view(): View {
         return view('livewire-datagrid::data-table');
     }
@@ -72,6 +77,7 @@ abstract class LivewireDatagrid extends Component
         return $this->view()->with([
             'addButton' => $this->addButton(),
             'columns' => $this->columns(),
+            'footer' => $this->footer(),
             'rows' => $this->rows,
             ...$withSelect,
         ]);

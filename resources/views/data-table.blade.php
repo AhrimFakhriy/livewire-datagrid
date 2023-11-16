@@ -70,13 +70,15 @@
                             <x-livewire-datagrid::table.cell colspan="100">
                                 <div class="py-2 text-center"><span class="text-slate-500">{{ trans("livewire-datagrid::datatable.labels.no_data") }}</span></div>
                             </x-livewire-datagrid::table.cell>
-                        </x-table.row>
+                        </x-livewire-datagrid::table.row>
                     @endforelse
                 </tbody>
 
-                <tfoot class="text-xs border-t border-slate-200 bg-slate-50">
-                    {{-- {{ $footer }} --}}
-                </tfoot>
+                @isset($footer)
+                    <tfoot class="text-xs border-t border-slate-200 bg-slate-50">
+                        {!! is_string($footer) ? $footer : $footer->render() !!}
+                    </tfoot>
+                @endisset
             </table>
         </div>
     </div>
